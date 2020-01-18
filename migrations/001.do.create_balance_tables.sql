@@ -17,7 +17,9 @@ CREATE TYPE balance_charge_category AS ENUM (
 
 CREATE TYPE balance_charge_occurance AS ENUM (
     'Monthly',
-    'One Time'
+    'One Time',
+    'Weekly',
+    'Biweekly'
 )
 
 CREATE TABLE balance_users (
