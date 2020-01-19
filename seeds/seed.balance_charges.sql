@@ -9,7 +9,7 @@ VALUES
 (1, 'Paycheck', 'Income', '2020-02-15', 1200, 'Feb 2020', 'Monthly'),
 (1, 'Groceries', 'Food/Drink', '2020-02-15', 150, 'Feb 2020', 'Monthly'),
 (1, 'Pet Insurance', 'Insurance/Financial', '2020-02-18', 60, 'Feb 2020', 'Monthly'),
-(1, 'Birthday Supplies', 'Entertainment', '2020-02-20', 200, 'Feb 2020', 'One time'),
+(1, 'Birthday Supplies', 'Entertainment', '2020-02-20', 200, 'Feb 2020', 'One Time'),
 (1, 'Emergency Fund Savings', 'Savings', '2020-02-15', 100, 'Feb 2020', 'Monthly'),
 (1, 'Vacation Fund Savings', 'Savings', '2020-02-15', 100, 'Feb 2020', 'Monthly'),
 (1, 'Groceries', 'Food/Drink', '2020-02-22', 150, 'Feb 2020', 'Monthly'),
@@ -24,7 +24,7 @@ VALUES
 (1, 'Paycheck', 'Income', '2020-03-21', 1200, 'Mar 2020', 'Monthly'),
 (1, 'Groceries', 'Food/Drink', '2020-03-21', 150, 'Mar 2020', 'Monthly'),
 (1, 'Pet Insurance', 'Insurance/Financial', '2020-03-18', 60, 'Mar 2020', 'Monthly'),
-(1, 'Birthday Supplies', 'Entertainment', '2020-03-20', 200, 'Mar 2020', 'One time'),
+(1, 'Dads B-day bash', 'Entertainment', '2020-03-20', 200, 'Mar 2020', 'One Time'),
 (1, 'Emergency Fund Savings', 'Savings', '2020-03-15', 100, 'Mar 2020', 'Monthly'),
 (1, 'Vacation Fund Savings', 'Savings', '2020-03-15', 100, 'Mar 2020', 'Monthly'),
 (1, 'Groceries', 'Food/Drink', '2020-03-28', 150, 'Mar 2020', 'Monthly');
