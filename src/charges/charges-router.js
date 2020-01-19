@@ -83,13 +83,48 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
     .catch(next);
 });
 
+// PATCH for updating a charge
+
 // DELETE for deleting existing charges from DB
-chargesRouter.route("/:charge_id").delete((req, res, next) => {
-  ChargesService.deleteCharge(req.app.get("db"), req.params.charge_id)
-    .then(() => {
-      res.status(204).end();
-    })
-    .catch(next);
-});
+chargesRouter
+  .route("/:charge_id")
+  .delete((req, res, next) => {
+    ChargesService.deleteCharge(req.app.get("db"), req.params.charge_id)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch(next);
+  })
+  .patch(jsonParser, (req, res, next) => {
+    const { charge_name, category, due_date, amount, occurance } = req.body;
+    const updatedCharge = {
+      charge_name,
+      category,
+      due_date,
+      amount,
+      occurance
+    };
+    console.log(updatedCharge);
+
+    const numberOfValues = Object.values(updatedCharge).filter(Boolean).length;
+
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain a charge field to update`
+        }
+      });
+    }
+
+    ChargesService.updateCharge(
+      req.app.get("db"),
+      req.params.charge_id,
+      updatedCharge
+    )
+      .then(numberRows => {
+        res.status(204).end();
+      })
+      .catch(next);
+  });
 
 module.exports = chargesRouter;
