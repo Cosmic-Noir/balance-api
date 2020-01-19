@@ -3,6 +3,8 @@ module.exports = {
   NODE_ENV: process.env.NODE_ENV || "development",
   DB_URL:
     process.env.DB_URL || "postgresqul://dunder_mifflin@localhost/balance",
-  TEST_DB_URL: "postgresql://dunder_mifflin@localhost/balance-test",
+  TEST_DB_URL:
+    process.env.TEST_DB_URL ||
+    "postgresql://dunder_mifflin@localhost/balance-test",
   JWT_SECRET: process.env.JWT_SECRET
 };
