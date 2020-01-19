@@ -1,6 +1,9 @@
 const xss = require("xss");
 
 const ChargesService = {
+  getAllCharges(knex) {
+    return knex.select("*").from("balance_charges");
+  },
   getchargeById(knex, charge_id) {
     return knex
       .select("*")
