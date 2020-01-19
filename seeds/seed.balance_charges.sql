@@ -15,7 +15,6 @@ VALUES
 (1, "Groceries", "Food/Drink", "2020-02-22", 150, "Feb 2020", "Monthly"),
 (1, "Groceries", "Food/Drink", "2020-02-29", 150, "Feb 2020", "Monthly"),
 (1, "Paycheck", "Income", "2020-02-29", 1200, "Feb 2020", "Monthly"),
-
 (1, "Rent", "Housing", "2020-03-01", 600, "Mar 2020", "Monthly"),
 (1, "Paycheck", "Income", "2020-03-07", 1200, "Mar 2020", "Monthly"),
 (1, "Groceries", "Food/Drink", "2020-03-07", 150, "Mar 2020", "Monthly"),
