@@ -44,4 +44,45 @@ chargesRouter.route("/").get(jsonParser, (req, res, next) => {
     .catch(next);
 });
 
+// POST for posting new charge - will need to eventually requireAuth, not required for now for testing
+chargesRouter.route("/").post(jsonParser, (req, res, next) => {
+  const {
+    user_id,
+    charge_name,
+    category,
+    due_date,
+    amount,
+    month_name,
+    occurance
+  } = req.body;
+  const newCharge = {
+    user_id,
+    charge_name,
+    category,
+    due_date,
+    amount,
+    month_name,
+    occurance
+  };
+
+  for (const [key, value] of Object.entries(newCharge)) {
+    if (value == null) {
+      return res.status(400).json({
+        error: `Missing '${key} in request body`
+      });
+    }
+  }
+
+  ChargesService.insertCharge(req.app.get("db"), newCharge)
+    .then(charge => {
+      res
+        .status(201)
+        .location(path.posix.join(req.originalUrl, `/${charge.charge_id}`))
+        .json(charge);
+    })
+    .catch(next);
+});
+
+// DELETE for deleting existing charges from DB
+
 module.exports = chargesRouter;

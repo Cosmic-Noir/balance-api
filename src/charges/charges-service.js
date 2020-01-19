@@ -2,7 +2,7 @@ const ChargesService = {
   getAllCharges(knex) {
     return knex.select("*").from("balance_charges");
   },
-  getchargeById(knex, charge_id) {
+  getChargeById(knex, charge_id) {
     return knex
       .select("*")
       .from("balance_charges")
@@ -20,7 +20,7 @@ const ChargesService = {
       .into("balance_charges")
       .returning("*")
       .then(([charge]) => charge)
-      .then(charge => chargesService.getChargeById(knex, charge.charge_id));
+      .then(charge => ChargesService.getChargeById(knex, charge.charge_id));
   },
   deleteCharge(knex, charge_id) {
     return knex("balance_charges")
