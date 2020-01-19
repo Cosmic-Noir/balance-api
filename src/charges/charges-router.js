@@ -84,5 +84,12 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
 });
 
 // DELETE for deleting existing charges from DB
+chargesRouter.route("/:charge_id").delete((req, res, next) => {
+  ChargesService.deleteCharge(req.app.get("db"), req.params.charge_id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch(next);
+});
 
 module.exports = chargesRouter;
