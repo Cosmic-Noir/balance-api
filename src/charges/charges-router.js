@@ -20,9 +20,24 @@ const sterilizedCharge = charge => ({
   occurance: charge.occurance
 });
 
-// GET All Charges
-chargesRouter.route("/").get((req, res, next) => {
-  ChargesService.getAllCharges(req.app.get("db"))
+// GET All Charges - No real use case for this at the moment aside from testing endpoint
+// chargesRouter.route("/").get((req, res, next) => {
+//   ChargesService.getAllCharges(req.app.get("db"))
+//     .then(charges => {
+//       res.json(charges.map(sterilizedCharge));
+//     })
+//     .catch(next);
+// });
+
+// GET charges matching user_id sent in request
+chargesRouter.route("/").get(jsonParser, (req, res, next) => {
+  if (req.body.user_id == undefined) {
+    return res.status(400).json({
+      error: `Missing user_id for matching charges`
+    });
+  }
+
+  ChargesService.getChargesByUserID(req.app.get("db"), req.body.user_id)
     .then(charges => {
       res.json(charges.map(sterilizedCharge));
     })
