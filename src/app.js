@@ -8,6 +8,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 /* Routers */
+const authRouter = require("./auth/auth-router");
 
 const app = express();
 
@@ -36,5 +37,6 @@ app.get("/", (req, res) => {
 });
 
 // Routers
+app.use("/api/login", authRouter);
 
 module.exports = app;
