@@ -17,4 +17,33 @@ authRouter.post("/", jsonParser, (req, res, next) => {
       });
     }
   }
+
+  // Check user exists
+  AuthService.getUser(req.app.get("db"), loginUser.username)
+    .then(dbUser => {
+      if (!dbUser) {
+        return res.status(400).json({
+          error: "Incorrect username or password"
+        });
+      }
+      // Check password matches
+      return AuthService.checkPassword(loginUser.pass, dbUser.pass).then(
+        compareMatch => {
+          if (!compareMatch) {
+            return res.status(400).json({
+              error: "Incorrect username or password"
+            });
+          }
+          // Send jwt if all passes
+          const sub = dbUser.username;
+          const payload = { user_id: dbUser.id };
+          res.send({
+            authToken: AuthService.createJwt(sub, payload)
+          });
+        }
+      );
+    })
+    .catch(next);
 });
+
+module.exports = authRouter;
