@@ -104,7 +104,6 @@ chargesRouter
       amount,
       occurance
     };
-    console.log(updatedCharge);
 
     const numberOfValues = Object.values(updatedCharge).filter(Boolean).length;
 
