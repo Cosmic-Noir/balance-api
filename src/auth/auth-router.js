@@ -6,6 +6,7 @@ const authRouter = express.Router();
 
 authRouter.post("/", jsonParser, (req, res, next) => {
   const { username, pass } = req.body;
+  console.log(req.body);
 
   const loginUser = { username, pass };
 
@@ -23,15 +24,16 @@ authRouter.post("/", jsonParser, (req, res, next) => {
     .then(dbUser => {
       if (!dbUser) {
         return res.status(400).json({
-          error: "Incorrect username or password"
+          error: "User not found"
         });
       }
+      console.log(`User found matching ${loginUser.username}`);
       // Check password matches
       return AuthService.checkPassword(loginUser.pass, dbUser.pass).then(
         compareMatch => {
           if (!compareMatch) {
             return res.status(400).json({
-              error: "Incorrect username or password"
+              error: "Incorrect password"
             });
           }
           // Send jwt if all passes
