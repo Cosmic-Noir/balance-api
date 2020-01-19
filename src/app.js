@@ -9,6 +9,7 @@ const morgan = require("morgan");
 
 /* Routers */
 const authRouter = require("./auth/auth-router");
+const usersRouter = require("./users/users-router");
 
 const app = express();
 
@@ -38,5 +39,6 @@ app.get("/", (req, res) => {
 
 // Routers
 app.use("/api/login", authRouter);
+app.use("/api/users", usersRouter);
 
 module.exports = app;
