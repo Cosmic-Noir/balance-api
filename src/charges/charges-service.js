@@ -22,6 +22,11 @@ const ChargesService = {
       .then(([charge]) => charge)
       .then(charge => ChargesService.getChargeById(knex, charge.charge_id));
   },
+  updateCharge(knex, charge_id, updatedCharge) {
+    return knex("balance_charges")
+      .where({ charge_id })
+      .update(updatedCharge);
+  },
   deleteCharge(knex, charge_id) {
     return knex("balance_charges")
       .where({ charge_id })
