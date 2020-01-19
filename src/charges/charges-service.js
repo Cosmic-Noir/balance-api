@@ -25,19 +25,6 @@ const ChargesService = {
     return knex("balance_charges")
       .where({ charge_id })
       .delete();
-  },
-  sterilizedCharge(charge) {
-    return {
-      charge_id: charge.charge_id,
-      user_id: charge.user_id,
-      date_create: new Date(charge.date_created),
-      charge_name: xss(charge.charge_name),
-      category: charge.category,
-      due_date: charge.due_date,
-      amount: charge.amount,
-      month_name: charge.month_name,
-      occurance: charge.occurance
-    };
   }
 };
 
