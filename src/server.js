@@ -1,7 +1,7 @@
 require("dotenv").config();
 const app = require("./app");
 const knex = require("knex");
-const { PORT } = require("./config");
+const { PORT, DB_URL } = require("./config");
 
 // Connect to Database specified in config/env
 const db = knex({
