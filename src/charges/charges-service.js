@@ -23,7 +23,6 @@ const ChargesService = {
       .then(charge => ChargesService.getChargeById(knex, charge.charge_id));
   },
   updateCharge(knex, charge_id, updatedCharge) {
-    console.log(updatedCharge);
     return knex("balance_charges")
       .where({ charge_id })
       .update(updatedCharge);
