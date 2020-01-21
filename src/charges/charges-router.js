@@ -88,6 +88,7 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
 // DELETE for deleting existing charges from DB
 chargesRouter
   .route("/:charge_id")
+  .all(checkChargeExists)
   .delete((req, res, next) => {
     ChargesService.deleteCharge(req.app.get("db"), req.params.charge_id)
       .then(() => {
@@ -125,5 +126,23 @@ chargesRouter
       })
       .catch(next);
   });
+
+// Async - Check charge exists
+async function checkChargeExists(req, res, next) {
+  try {
+    const charge = await ChargesService.getChargeById(
+      req.app.get("db"),
+      req.params.site_id
+    );
+
+    if (!charge) return res.status(400).json({ error: `Charge doesn't exist` });
+
+    res.charge = charge;
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+}
 
 module.exports = chargesRouter;
