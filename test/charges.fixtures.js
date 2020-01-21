@@ -24,7 +24,7 @@ function makeChargesArray() {
     },
     {
       charge_id: 3,
-      user_id: 1,
+      user_id: 2,
       date_created: new Date().toISOString(),
       charge_name: "Groceries",
       category: "Food/Drink",
