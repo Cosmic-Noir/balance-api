@@ -75,6 +75,7 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
 
   ChargesService.insertCharge(req.app.get("db"), newCharge)
     .then(charge => {
+      console.log(charge);
       res
         .status(201)
         .location(path.posix.join(req.originalUrl, `/${charge.charge_id}`))

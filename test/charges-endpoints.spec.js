@@ -75,3 +75,42 @@ describe("GET /api", function() {
     });
   });
 });
+
+// POST endpoint
+describe(`PATCH /api/charges`, () => {
+  const testUsers = makeUsersArray();
+
+  beforeEach(`Insert users`, () => {
+    return db.into("balance_users").insert(testUsers);
+  });
+
+  it(`Posts the new charge, responds with 201 and the new charge`, () => {
+    const newCharge = {
+      user_id: 1,
+      charge_name: "Rent",
+      category: "Housing",
+      due_date: "2020-02-01",
+      amount: 1000,
+      month_name: "Feb 2020",
+      occurance: "Monthly"
+    };
+
+    return supertest(app)
+      .post(`/api/charges`)
+      .send(newCharge)
+      .expect(201)
+      .expect(res => {
+        expect(res.body.charge_name).to.eql(newCharge.charge_name);
+        expect(res.body.category).to.eql(newCharge.category);
+        expect(res.body.due_date).to.eql(newCharge.due_date);
+        expect(res.body.amount).to.eql(newCharge.amount);
+        expect(res.body.month_name).to.eql(newCharge.month_name);
+        expect(res.body.occurance).to.eql(newCharge.occurance);
+        expect(res.headers.location).to.eql(
+          `/api/charges/${res.body.charge_id}`
+        );
+      });
+  });
+});
+
+// PATCH endpoint

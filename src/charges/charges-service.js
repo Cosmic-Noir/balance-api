@@ -19,8 +19,9 @@ const ChargesService = {
       .insert(newCharge)
       .into("balance_charges")
       .returning("*")
-      .then(([charge]) => charge)
-      .then(charge => ChargesService.getChargeById(knex, charge.charge_id));
+      .then(rows => {
+        return rows[0];
+      });
   },
   updateCharge(knex, charge_id, updatedCharge) {
     return knex("balance_charges")
