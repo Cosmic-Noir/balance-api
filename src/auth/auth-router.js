@@ -24,7 +24,7 @@ authRouter.post("/", jsonParser, (req, res, next) => {
     .then(dbUser => {
       if (!dbUser) {
         return res.status(400).json({
-          error: "User not found"
+          error: "Incorrect username or password"
         });
       }
       console.log(`User found matching ${loginUser.username}`);
@@ -33,7 +33,7 @@ authRouter.post("/", jsonParser, (req, res, next) => {
         compareMatch => {
           if (!compareMatch) {
             return res.status(400).json({
-              error: "Incorrect password"
+              error: "Incorrect username or password"
             });
           }
           // Send jwt if all passes
