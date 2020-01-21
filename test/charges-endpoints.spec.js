@@ -50,12 +50,17 @@ describe("GET /api", function() {
     });
 
     it(`Responds with 200 status and matching charges`, () => {
-      //   this.retries(3);
       const userID = { user_id: testUsers[0].user_id };
       return supertest(app)
         .get(`/api/charges`)
         .send(userID)
         .expect(200, [testCharges[0], testCharges[1]]);
+    });
+
+    it(`Responds with 400 status when no user_id provided`, () => {
+      return supertest(app)
+        .get(`/api/charges`)
+        .expect(400, { error: `Missing user_id for matching charges` });
     });
   });
 });
