@@ -30,7 +30,7 @@ const sterilizedCharge = charge => ({
 // });
 
 // GET charges matching user_id sent in request
-chargesRouter.route("/").get(jsonParser, (req, res, next) => {
+chargesRouter.route("/").get(requireAuth, jsonParser, (req, res, next) => {
   if (req.body.user_id == undefined) {
     return res.status(400).json({
       error: `Missing user_id for matching charges`
