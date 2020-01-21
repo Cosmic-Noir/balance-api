@@ -68,7 +68,7 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
   for (const [key, value] of Object.entries(newCharge)) {
     if (value == null) {
       return res.status(400).json({
-        error: `Missing '${key} in request body`
+        error: `Missing '${key}' in request body`
       });
     }
   }

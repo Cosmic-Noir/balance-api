@@ -111,6 +111,41 @@ describe(`PATCH /api/charges`, () => {
         );
       });
   });
+
+  // Test missing fields
+
+  const requiredFields = [
+    "user_id",
+    "charge_name",
+    "category",
+    "due_date",
+    "amount",
+    "month_name",
+    "occurance"
+  ];
+
+  requiredFields.forEach(field => {
+    const newCharge = {
+      user_id: 1,
+      charge_name: "Rent",
+      category: "Housing",
+      due_date: "2020-02-01",
+      amount: 1000,
+      month_name: "Feb 2020",
+      occurance: "Monthly"
+    };
+
+    it(`Responds with 400 error when ${field} is missing`, () => {
+      delete newCharge[field];
+
+      return supertest(app)
+        .post(`/api/charges`)
+        .send(newCharge)
+        .expect(400, {
+          error: `Missing '${field}' in request body`
+        });
+    });
+  });
 });
 
 // PATCH endpoint
