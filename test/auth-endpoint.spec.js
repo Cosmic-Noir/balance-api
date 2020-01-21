@@ -49,11 +49,34 @@ describe("POST /api/login", () => {
   });
 
   it(`Responds with 400 "Incorrect username or password" if incorrect info supplied`, () => {
-    const invalidUser = { username: "badName", pass: "extraBadPass" };
+    const invalidUser = { username: "badName", pass: "somepass" };
 
     return supertest(app)
       .post(`/api/login`)
       .send(invalidUser)
       .expect(400, { error: "Incorrect username or password" });
+  });
+
+  it(`Responds with 200 if correct info is supplied`, () => {
+    const validUser = {
+      username: testUsers[0].username,
+      pass: "Testing1234!"
+    };
+
+    const expectedToken = jwt.sign(
+      { user_id: testUsers[0].user_id },
+      process.env.JWT_SECRET,
+      {
+        subject: testUsers[0].username,
+        algorithm: "HS256"
+      }
+    );
+
+    return supertest(app)
+      .post(`/api/login`)
+      .send(validUser)
+      .expect(200, {
+        authToken: expectedToken
+      });
   });
 });
