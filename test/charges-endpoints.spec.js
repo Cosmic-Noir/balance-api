@@ -35,4 +35,27 @@ describe("GET /api", function() {
         .expect(200);
     });
   });
+
+  context(`Given there are matching charges for user`, () => {
+    const testUsers = makeUsersArray();
+    const testCharges = makeChargesArray();
+
+    beforeEach(`Insert users and charges`, () => {
+      return db
+        .into("balance_users")
+        .insert(testUsers)
+        .then(() => {
+          return db.into("balance_charges").insert(testCharges);
+        });
+    });
+
+    it(`Responds with 200 status and matching charges`, () => {
+      //   this.retries(3);
+      const userID = { user_id: testUsers[0].user_id };
+      return supertest(app)
+        .get(`/api/charges`)
+        .send(userID)
+        .expect(200, [testCharges[0], testCharges[1]]);
+    });
+  });
 });
