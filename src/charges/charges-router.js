@@ -11,7 +11,7 @@ const jsonParser = express.json();
 const sterilizedCharge = charge => ({
   charge_id: charge.charge_id,
   user_id: charge.user_id,
-  date_create: new Date(charge.date_created),
+  date_created: new Date(charge.date_created),
   charge_name: xss(charge.charge_name),
   category: charge.category,
   due_date: charge.due_date,
