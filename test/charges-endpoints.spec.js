@@ -77,7 +77,7 @@ describe("GET /api", function() {
 });
 
 // POST endpoint
-describe(`PATCH /api/charges`, () => {
+describe(`POST /api/charges`, () => {
   const testUsers = makeUsersArray();
 
   beforeEach(`Insert users`, () => {
@@ -156,5 +156,35 @@ describe(`PATCH /api/charges/:charge_id`, () => {
     return supertest(app)
       .patch(`/api/charges/${chargeID}`)
       .expect(404, { error: `Charge doesn't exist` });
+  });
+
+  context(`Given there is a matching charge`, () => {
+    const testUsers = makeUsersArray();
+    const testCharges = makeChargesArray();
+
+    beforeEach(`Insert users and charges`, () => {
+      return db
+        .into("balance_users")
+        .insert(testUsers)
+        .then(() => {
+          return db.into("balance_charges").insert(testCharges);
+        });
+    });
+
+    it(`Responds with 204 and updates the charge`, () => {
+      const idToUpdate = 1;
+      const updatedCharge = {
+        charge_name: "Apartment Rent",
+        category: "Housing",
+        due_date: "2020-02-01",
+        amount: 1230,
+        occurance: "Monthly"
+      };
+
+      return supertest(app)
+        .patch(`/api/charges/${idToUpdate}`)
+        .send(updatedCharge)
+        .expect(204);
+    });
   });
 });
