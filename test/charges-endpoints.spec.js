@@ -27,10 +27,17 @@ afterEach(`Cleanup`, () =>
 // GET endpoints
 describe("GET /api", function() {
   context(`Given there are no charges`, () => {
+    const testUsers = makeUsersArray();
+
+    beforeEach(`Insert users`, () => {
+      return db.into("balance_users").insert(testUsers);
+    });
+
     it(`Responds with 200 status and empty list`, () => {
       const userID = { user_id: 1 };
       return supertest(app)
         .get(`/api/charges`)
+        .set("Authorization", makeAuthHeader(testUsers[0]))
         .send(userID)
         .expect(200);
     });
@@ -53,6 +60,8 @@ describe("GET /api", function() {
       const userID = { user_id: testUsers[0].user_id };
       return supertest(app)
         .get(`/api/charges`)
+        .set("Authorization", makeAuthHeader(testUsers[0]))
+
         .send(userID)
         .expect(200, [testCharges[0], testCharges[1]]);
     });
@@ -60,6 +69,8 @@ describe("GET /api", function() {
     it(`Responds with 400 status when no user_id provided`, () => {
       return supertest(app)
         .get(`/api/charges`)
+        .set("Authorization", makeAuthHeader(testUsers[0]))
+
         .expect(400, { error: `Missing user_id for matching charges` });
     });
   });
