@@ -149,3 +149,12 @@ describe(`PATCH /api/charges`, () => {
 });
 
 // PATCH endpoint
+describe(`PATCH /api/charges/:charge_id`, () => {
+  context(`Given there are no matching sites`, () => {
+    const chargeID = 12344;
+
+    return supertest(app)
+      .patch(`/api/charges/${chargeID}`)
+      .expect(404, { error: `Charge doesn't exist` });
+  });
+});
