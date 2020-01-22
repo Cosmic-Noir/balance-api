@@ -30,15 +30,13 @@ const sterilizedCharge = charge => ({
 // });
 
 // GET charges matching user_id sent in request
-chargesRouter
-  .route("/:user_id")
-  .get(requireAuth, jsonParser, (req, res, next) => {
-    ChargesService.getChargesByUserID(req.app.get("db"), req.params.user_id)
-      .then(charges => {
-        res.json(charges.map(sterilizedCharge));
-      })
-      .catch(next);
-  });
+chargesRouter.route("/:user_id").get(jsonParser, (req, res, next) => {
+  ChargesService.getChargesByUserID(req.app.get("db"), req.params.user_id)
+    .then(charges => {
+      res.json(charges.map(sterilizedCharge));
+    })
+    .catch(next);
+});
 
 // POST for posting new charge - will need to eventually requireAuth, not required for now for testing
 chargesRouter.route("/").post(jsonParser, (req, res, next) => {
