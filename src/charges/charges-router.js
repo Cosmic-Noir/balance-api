@@ -30,19 +30,21 @@ const sterilizedCharge = charge => ({
 // });
 
 // GET charges matching user_id sent in request
-chargesRouter.route("/").get(requireAuth, jsonParser, (req, res, next) => {
-  if (req.body.user_id == undefined) {
-    return res.status(400).json({
-      error: `Missing user_id for matching charges`
-    });
-  }
+chargesRouter
+  .route("/:user_id")
+  .get(requireAuth, jsonParser, (req, res, next) => {
+    if (req.params.user_id == undefined) {
+      return res.status(400).json({
+        error: `Missing user_id for matching charges`
+      });
+    }
 
-  ChargesService.getChargesByUserID(req.app.get("db"), req.body.user_id)
-    .then(charges => {
-      res.json(charges.map(sterilizedCharge));
-    })
-    .catch(next);
-});
+    ChargesService.getChargesByUserID(req.app.get("db"), req.params.user_id)
+      .then(charges => {
+        res.json(charges.map(sterilizedCharge));
+      })
+      .catch(next);
+  });
 
 // POST for posting new charge - will need to eventually requireAuth, not required for now for testing
 chargesRouter.route("/").post(jsonParser, (req, res, next) => {
