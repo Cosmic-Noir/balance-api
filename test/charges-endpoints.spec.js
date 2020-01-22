@@ -34,11 +34,10 @@ describe("GET /api", function() {
     });
 
     it(`Responds with 200 status and empty list`, () => {
-      const userID = { user_id: 1 };
+      const user_id = testUsers[0].user_id;
       return supertest(app)
-        .get(`/api/charges`)
+        .get(`/api/charges/${user_id}`)
         .set("Authorization", makeAuthHeader(testUsers[0]))
-        .send(userID)
         .expect(200);
     });
   });
@@ -57,12 +56,11 @@ describe("GET /api", function() {
     });
 
     it(`Responds with 200 status and matching charges`, () => {
-      const userID = { user_id: testUsers[0].user_id };
+      const user_id = testUsers[0].user_id;
       return supertest(app)
-        .get(`/api/charges`)
+        .get(`/api/charges/${user_id}`)
         .set("Authorization", makeAuthHeader(testUsers[0]))
 
-        .send(userID)
         .expect(200, [testCharges[0], testCharges[1]]);
     });
 
@@ -71,7 +69,7 @@ describe("GET /api", function() {
         .get(`/api/charges`)
         .set("Authorization", makeAuthHeader(testUsers[0]))
 
-        .expect(400, { error: `Missing user_id for matching charges` });
+        .expect(404);
     });
   });
 });

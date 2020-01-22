@@ -33,12 +33,6 @@ const sterilizedCharge = charge => ({
 chargesRouter
   .route("/:user_id")
   .get(requireAuth, jsonParser, (req, res, next) => {
-    if (req.params.user_id == undefined) {
-      return res.status(400).json({
-        error: `Missing user_id for matching charges`
-      });
-    }
-
     ChargesService.getChargesByUserID(req.app.get("db"), req.params.user_id)
       .then(charges => {
         res.json(charges.map(sterilizedCharge));
