@@ -153,9 +153,11 @@ describe(`PATCH /api/charges/:charge_id`, () => {
   context(`Given there are no matching sites`, () => {
     const chargeID = 12344;
 
-    return supertest(app)
-      .patch(`/api/charges/${chargeID}`)
-      .expect(404, { error: `Charge doesn't exist` });
+    it(`Responds with 404 and charge doesn't exiwt`, () => {
+      return supertest(app)
+        .patch(`/api/charges/${chargeID}`)
+        .expect(404, { error: `Charge doesn't exist` });
+    });
   });
 
   context(`Given there is a matching charge`, () => {

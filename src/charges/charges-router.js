@@ -132,13 +132,17 @@ async function checkChargeExists(req, res, next) {
   try {
     const charge = await ChargesService.getChargeById(
       req.app.get("db"),
-      req.params.site_id
+      req.params.charge_id
     );
 
-    if (!charge) return res.status(400).json({ error: `Charge doesn't exist` });
+    // console.log(charge);
+    if (!charge) {
+      return res.status(404).json({
+        error: `Charge doesn't exist`
+      });
+    }
 
-    res.charge = charge;
-
+    res = charge;
     next();
   } catch (error) {
     next(error);

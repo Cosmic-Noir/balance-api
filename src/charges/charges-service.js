@@ -6,7 +6,8 @@ const ChargesService = {
     return knex
       .select("*")
       .from("balance_charges")
-      .where("balance_charges.charge_id", charge_id);
+      .where("balance_charges.charge_id", charge_id)
+      .first();
   },
   getChargesByUserID(knex, user_id) {
     return knex
