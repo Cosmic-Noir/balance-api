@@ -142,7 +142,7 @@ describe(`POST /api/charges`, () => {
         .post(`/api/charges`)
         .send(newCharge)
         .expect(400, {
-          error: `Missing '${field}' in request body`
+          error: { message: `Missing '${field}' in request body` }
         });
     });
   });
