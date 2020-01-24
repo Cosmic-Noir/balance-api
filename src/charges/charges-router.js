@@ -30,8 +30,9 @@ const sterilizedCharge = charge => ({
 // });
 
 // GET charges matching user_id sent in request
-chargesRouter.route("/:user_id").get(jsonParser, (req, res, next) => {
-  ChargesService.getChargesByUserID(req.app.get("db"), req.params.user_id)
+chargesRouter.route("/").get(requireAuth, jsonParser, (req, res, next) => {
+  console.log(req.user_id);
+  ChargesService.getChargesByUserID(req.app.get("db"), req.user_id)
     .then(charges => {
       res.json(charges.map(sterilizedCharge));
     })
