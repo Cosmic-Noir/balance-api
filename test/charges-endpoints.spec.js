@@ -25,7 +25,7 @@ afterEach(`Cleanup`, () =>
 );
 
 // GET endpoints
-describe("GET /api", function() {
+describe("GET /api/charges", function() {
   context(`Given there are no charges`, () => {
     const testUsers = makeUsersArray();
 
@@ -36,7 +36,7 @@ describe("GET /api", function() {
     it(`Responds with 200 status and empty list`, () => {
       const user_id = testUsers[0].user_id;
       return supertest(app)
-        .get(`/api/charges/${user_id}`)
+        .get(`/api/charges/`)
         .set("Authorization", makeAuthHeader(testUsers[0]))
         .expect(200);
     });
@@ -58,18 +58,20 @@ describe("GET /api", function() {
     it(`Responds with 200 status and matching charges`, () => {
       const user_id = testUsers[0].user_id;
       return supertest(app)
-        .get(`/api/charges/${user_id}`)
+        .get(`/api/charges/`)
         .set("Authorization", makeAuthHeader(testUsers[0]))
 
         .expect(200, [testCharges[0], testCharges[1]]);
     });
 
-    it(`Responds with 400 status when no user_id provided`, () => {
-      return supertest(app)
-        .get(`/api/charges`)
-        .set("Authorization", makeAuthHeader(testUsers[0]))
+    it(`Responds with 401 status when no user_id provided by requiredAuth`, () => {
+      return (
+        supertest(app)
+          .get(`/api/charges`)
+          // .set("Authorization", makeAuthHeader(testUsers[0]))
 
-        .expect(404);
+          .expect(401)
+      );
     });
   });
 });
