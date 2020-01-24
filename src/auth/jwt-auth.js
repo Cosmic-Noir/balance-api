@@ -22,7 +22,8 @@ function requireAuth(req, res, next) {
             .status(401)
             .json({ error: "Unauthorized request - invalid user" });
         }
-        req.user_id = user.id;
+
+        req.user_id = user.user_id;
         next();
       })
       .catch(err => {

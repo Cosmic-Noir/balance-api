@@ -39,9 +39,8 @@ chargesRouter.route("/:user_id").get(jsonParser, (req, res, next) => {
 });
 
 // POST for posting new charge - will need to eventually requireAuth, not required for now for testing
-chargesRouter.route("/").post(jsonParser, (req, res, next) => {
+chargesRouter.route("/").post(requireAuth, jsonParser, (req, res, next) => {
   const {
-    user_id,
     charge_name,
     category,
     due_date,
@@ -50,7 +49,6 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
     occurance
   } = req.body;
   const newCharge = {
-    user_id,
     charge_name,
     category,
     due_date,
@@ -58,6 +56,9 @@ chargesRouter.route("/").post(jsonParser, (req, res, next) => {
     month_name,
     occurance
   };
+
+  newCharge.user_id = req.user_id;
+  console.log(newCharge);
 
   for (const [key, value] of Object.entries(newCharge)) {
     if (value == null) {
