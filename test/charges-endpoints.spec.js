@@ -84,7 +84,6 @@ describe(`POST /api/charges`, () => {
 
   it(`Posts the new charge, responds with 201 and the new charge`, () => {
     const newCharge = {
-      user_id: 1,
       charge_name: "Rent",
       category: "Housing",
       due_date: "2020-02-01",
@@ -95,6 +94,7 @@ describe(`POST /api/charges`, () => {
 
     return supertest(app)
       .post(`/api/charges`)
+      .set("Authorization", makeAuthHeader(testUsers[0]))
       .send(newCharge)
       .expect(201)
       .expect(res => {
@@ -113,7 +113,6 @@ describe(`POST /api/charges`, () => {
   // Test missing fields
 
   const requiredFields = [
-    "user_id",
     "charge_name",
     "category",
     "due_date",
@@ -124,7 +123,6 @@ describe(`POST /api/charges`, () => {
 
   requiredFields.forEach(field => {
     const newCharge = {
-      user_id: 1,
       charge_name: "Rent",
       category: "Housing",
       due_date: "2020-02-01",
@@ -138,6 +136,8 @@ describe(`POST /api/charges`, () => {
 
       return supertest(app)
         .post(`/api/charges`)
+        .set("Authorization", makeAuthHeader(testUsers[0]))
+
         .send(newCharge)
         .expect(400, {
           error: { message: `Missing '${field}' in request body` }
