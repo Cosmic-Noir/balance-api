@@ -185,6 +185,8 @@ describe(`PATCH /api/charges/:charge_id`, () => {
 
       return supertest(app)
         .patch(`/api/charges/${idToUpdate}`)
+        .set("Authorization", makeAuthHeader(testUsers[0]))
+
         .send(updatedCharge)
         .expect(204);
     });

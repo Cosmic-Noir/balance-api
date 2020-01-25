@@ -85,14 +85,14 @@ chargesRouter.route("/").post(requireAuth, jsonParser, (req, res, next) => {
 chargesRouter
   .route("/:charge_id")
   .all(checkChargeExists)
-  .delete((req, res, next) => {
+  .delete(requireAuth, (req, res, next) => {
     ChargesService.deleteCharge(req.app.get("db"), req.params.charge_id)
       .then(() => {
         res.status(204).end();
       })
       .catch(next);
   })
-  .patch(jsonParser, (req, res, next) => {
+  .patch(requireAuth, jsonParser, (req, res, next) => {
     const { charge_name, category, due_date, amount, occurance } = req.body;
     const updatedCharge = {
       charge_name,
