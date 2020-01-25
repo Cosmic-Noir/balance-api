@@ -31,7 +31,7 @@ const sterilizedCharge = charge => ({
 
 // GET charges matching user_id sent in request
 chargesRouter.route("/").get(requireAuth, jsonParser, (req, res, next) => {
-  console.log(req.user_id);
+  // console.log(req.user_id);
   ChargesService.getChargesByUserID(req.app.get("db"), req.user_id)
     .then(charges => {
       res.json(charges.map(sterilizedCharge));
@@ -59,7 +59,7 @@ chargesRouter.route("/").post(requireAuth, jsonParser, (req, res, next) => {
   };
 
   newCharge.user_id = req.user_id;
-  console.log(newCharge);
+  // console.log(newCharge);
 
   for (const [key, value] of Object.entries(newCharge)) {
     if (value == null) {

@@ -27,7 +27,7 @@ authRouter.post("/", jsonParser, (req, res, next) => {
           error: "Incorrect username or password"
         });
       }
-      console.log(`User found matching ${loginUser.username}`);
+      // console.log(`User found matching ${loginUser.username}`);
       // Check password matches
       return AuthService.checkPassword(loginUser.pass, dbUser.pass).then(
         compareMatch => {
