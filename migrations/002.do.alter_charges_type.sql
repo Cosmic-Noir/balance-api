@@ -1,0 +1,1 @@
+ALTER TABLE balance_charges ALTER COLUMN amount TYPE FLOAT(2);
