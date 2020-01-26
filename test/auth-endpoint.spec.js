@@ -57,7 +57,7 @@ describe("POST /api/login", () => {
       .expect(400, { error: "Incorrect username or password" });
   });
 
-  it.skip(`Responds with 200 if correct info is supplied`, () => {
+  it(`Responds with 200 if correct info is supplied`, () => {
     const validUser = {
       username: testUsers[0].username,
       pass: "Testing1234!"
