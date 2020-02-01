@@ -1,0 +1,1 @@
+ALTER TYPE balance_charge_category ADD VALUE 'Student Loans';
