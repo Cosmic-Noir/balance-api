@@ -77,9 +77,7 @@ chargesRouter.route("/").post(requireAuth, jsonParser, (req, res, next) => {
     .catch(next);
 });
 
-// PATCH for updating a charge
-
-// DELETE for deleting existing charges from DB
+// PATCH and DELETE existing charges from DB
 chargesRouter
   .route("/:charge_id")
   .all(checkChargeExists)

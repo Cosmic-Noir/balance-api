@@ -1,26 +1,179 @@
-# Express Boilerplate!
+# Balance API
 
-This is a boilerplate project used for starting new projects!
+This is the API for Balance's client-side React app.
 
-## Set up
+[Live Client](https://balance-app.cosmicnoir.now.sh/)
+<br />[Client Repo](https://github.com/Cosmic-Noir/balance-app)
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Resource Description
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+Contains information about user info and user charges.
 
-## Scripts
+## Getting Started
 
-Start the application `npm start`
+Source URL:
 
-Start nodemon for the application `npm run dev`
+```
+https://mysterious-sea-08728.herokuapp.com/api/
+```
 
-Run the tests `npm test`
+## Authentication Requirements
 
-## Deploying
+GET, POST, PATCH, and DELETE all require an Authorization header in the following format with a server-issued JWT.
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+```
+Authorization: "Bearer {JSON-Web-Token}"
+```
+
+## Endpoints and Methods
+
+### /charges Endpoint
+
+```
+GET /charges
+```
+
+GET all charges that match user_id obtained from valid JWT token in Req.
+
+```
+POST /charges
+```
+
+Posts a new charge with user_id obtained from JWT token to database.
+
+### /charges/:charge_id Endpoint
+
+```
+PATCH /charges/:charge_id
+```
+
+PATCH to update a charge with matching charge_id in database.
+
+```
+DELETE /charges/:charge_id
+```
+
+DELETE to remove a charge with matching charge_id in database.
+
+### /users Endpoint
+
+```
+POST /users
+```
+
+Post new user information to database
+
+### /login Endpoint
+
+```
+POST /login
+```
+
+Post submitted user login information, validates against database, returns JSON Web Token if validated.
+
+## Parameters
+
+POST /charges - Request sent as application/json with below parameters and values
+
+|  Parameter  |  Type  |
+| :---------: | :----: |
+|   amount    | FLOAT  |
+|  category   | string |
+| charge_name | string |
+|  due_date   | string |
+|  occurance  | string |
+| month_name  | string |
+
+Example Request Body:
+
+```
+{
+    "amount": 20.99,
+    "category": "Entertainment",
+    "charge_name": "Nintendo Game: Zelda",
+    "due_date": "2020-02-13",
+    "occurance": "One Time",
+    "month_name": "Feb 2020"
+}
+
+POST /users - Request sent as JSON with the following parameters
+
+| Parameter |  Type  |
+| :-------: | :----: |
+| username  | string |
+|   pass    | string |
+|   email   | string |
+
+Example Request Body:
+
+```
+
+{ username: 'newUser',
+email: 'someemail@gmail.com',
+pass: 'Pass123!' }
+
+```
+
+POST /login - Request sent as JSON with the following parameters.
+
+| Parameter |  Type  |
+| :-------: | :----: |
+| username  | string |
+|   pass    | string |
+
+Example Request Body:
+
+```
+
+{ pass: 'somePass12!', username: 'someUser12' }
+
+```
+
+```
+
+## Response Example and Schema
+
+### GET /charges
+
+Ex Request to: <em>https://mysterious-sea-08728.herokuapp.com/api/charges</em>
+
+Sent with Header: <em>Authorization: Bearer (JWT here)</EM>
+
+Response of user who has two posted charges:
+
+```
+[
+      {
+        "charge_id": 244,
+        "user_id": 4,
+        "date_created": "2020-02-03T04:33:40.873Z",
+        "charge_name": "Paycheck",
+        "category": "Income",
+        "due_date": "2020-02-01",
+        "amount": 1200,
+        "month_name": "Feb 2020",
+        "occurance": "Monthly"
+    },
+    {
+        "charge_id": 245,
+        "user_id": 4,
+        "date_created": "2020-02-03T04:33:40.873Z",
+        "charge_name": "Rent",
+        "category": "Housing",
+        "due_date": "2020-02-01",
+        "amount": 1000,
+        "month_name": "Feb 2020",
+        "occurance": "Monthly"
+    }
+]
+```
+
+### POST /login
+
+Ex Request: <em>https://mysterious-sea-08728.herokuapp.com/api/login</em>
+
+Response:
+
+```
+{authToken: {server-generated-JWT}}
+```
