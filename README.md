@@ -130,8 +130,6 @@ Example Request Body:
 
 ```
 
-```
-
 ## Response Example and Schema
 
 ### GET /charges
@@ -180,6 +178,8 @@ Response:
 ```
 
 {authToken: {server-generated-JWT}}
+
+```
 
 ```
 
