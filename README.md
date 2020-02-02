@@ -95,6 +95,7 @@ Example Request Body:
     "occurance": "One Time",
     "month_name": "Feb 2020"
 }
+```
 
 POST /users - Request sent as JSON with the following parameters
 
@@ -142,30 +143,32 @@ Sent with Header: <em>Authorization: Bearer (JWT here)</EM>
 Response of user who has two posted charges:
 
 ```
+
 [
-      {
-        "charge_id": 244,
-        "user_id": 4,
-        "date_created": "2020-02-03T04:33:40.873Z",
-        "charge_name": "Paycheck",
-        "category": "Income",
-        "due_date": "2020-02-01",
-        "amount": 1200,
-        "month_name": "Feb 2020",
-        "occurance": "Monthly"
-    },
-    {
-        "charge_id": 245,
-        "user_id": 4,
-        "date_created": "2020-02-03T04:33:40.873Z",
-        "charge_name": "Rent",
-        "category": "Housing",
-        "due_date": "2020-02-01",
-        "amount": 1000,
-        "month_name": "Feb 2020",
-        "occurance": "Monthly"
-    }
+{
+"charge_id": 244,
+"user_id": 4,
+"date_created": "2020-02-03T04:33:40.873Z",
+"charge_name": "Paycheck",
+"category": "Income",
+"due_date": "2020-02-01",
+"amount": 1200,
+"month_name": "Feb 2020",
+"occurance": "Monthly"
+},
+{
+"charge_id": 245,
+"user_id": 4,
+"date_created": "2020-02-03T04:33:40.873Z",
+"charge_name": "Rent",
+"category": "Housing",
+"due_date": "2020-02-01",
+"amount": 1000,
+"month_name": "Feb 2020",
+"occurance": "Monthly"
+}
 ]
+
 ```
 
 ### POST /login
@@ -175,5 +178,9 @@ Ex Request: <em>https://mysterious-sea-08728.herokuapp.com/api/login</em>
 Response:
 
 ```
+
 {authToken: {server-generated-JWT}}
+
+```
+
 ```
