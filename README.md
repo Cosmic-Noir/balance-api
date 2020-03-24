@@ -184,3 +184,41 @@ Response:
 ```
 
 ```
+
+
+Test stuff: 
+
+## Top MacOS hotkeys: 
+
+| Key  |  Action  |
+| :-------: | :----: |
+| Cmd + Space  | Opens Mac search spotlight |
+| Cmd + Shft + Opt + V  | Paste and match style |
+| Cmd + `    | Toggle to alt window in same app |
+| Cmd + Tab  | Toggle between apps |
+| Cmd + Shift + 4  | Drag and select Screenshot |
+| Cmd + Shift + 5  | Resizable screenshot/video |
+| Cmd + K    | Clears the terminal |
+| Cmd + M    | Minimizes selected window |
+| Cmd + Q    | Quits application |
+| Cmd + left/rifght arrow    | Moves cursor to end or beg of line (+shft will highlight)|
+| Opt + left/rifght arrow    | Moves cursor to end or beg of word (+shft will highlight)|
+
+
+
+
+
+## Top VSC MacOS hotkeys:
+
+| Key  |  Action  |
+| :-------: | :----: |
+| Cmd + J | Toggle Terminal |
+|   Cmd + `    | Toggle to alt window in same app |
+|   Cmd + P   | Search for file |
+|   Cmd + F   | Search for text |
+|   Cmd + Shft + F  | Search for text in directory |
+|   Opt + Up or Down   | Move line of code up/down |
+|   Cmd + Shft + N   | New window |
+|   Cmd + O  | Add new file to workspace |
+|   Highlight text + Cmd + D | Highlights all instances of text in file with multiple cursors |
+
