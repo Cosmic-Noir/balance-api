@@ -188,7 +188,7 @@ Response:
 
 Test stuff: 
 
-## Top MacOS hotkeys: 
+#### Top MacOS hotkeys: 
 
 | Key  |  Action  |
 | :-------: | :----: |
@@ -201,14 +201,14 @@ Test stuff:
 | Cmd + K    | Clears the terminal |
 | Cmd + M    | Minimizes selected window |
 | Cmd + Q    | Quits application |
-| Cmd + left/rifght arrow    | Moves cursor to end or beg of line (+shft will highlight)|
-| Opt + left/rifght arrow    | Moves cursor to end or beg of word (+shft will highlight)|
+| Cmd + left/right arrow    | Moves cursor to end or beg of line (+shft will highlight)|
+| Opt + left/right arrow    | Moves cursor to end or beg of word (+shft will highlight)|
 
 
 
 
 
-## Top VSC MacOS hotkeys:
+#### Top VSC MacOS hotkeys:
 
 | Key  |  Action  |
 | :-------: | :----: |
